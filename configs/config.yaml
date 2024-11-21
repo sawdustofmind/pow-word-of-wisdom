@@ -1,0 +1,14 @@
+server:
+  host: 127.0.0.1
+  port: 8888
+
+hashcash:
+  zeros_count: 4
+  max_iterations: 100000
+
+client:
+  challenge_len: 32
+  queue_len_limit: 30
+  write_timeout: 10s
+  debug_read: true
+  debug_write: true

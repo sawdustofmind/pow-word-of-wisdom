@@ -1,0 +1,24 @@
+version: '3.7'
+
+services:
+  server:
+    build:
+      context: .
+      dockerfile: ci/server.Dockerfile
+    environment:
+      SERVER_HOST: "127.0.0.1"
+      SERVER_PORT: '8888'
+    ports:
+      - '8888:8888'
+    restart: on-failure
+
+  client:
+    build:
+      context: .
+      dockerfile: ci/client.Dockerfile
+    environment:
+      SERVER_HOST: "server"
+      SERVER_PORT: '8888'
+    restart: on-failure
+    depends_on:
+      - server
