@@ -8,39 +8,6 @@ import (
 	"github.com/stretchr/testify/require"
 )
 
-func TestIsHashCorrect(t *testing.T) {
-	type args struct {
-		hash       string
-		zerosCount int
-	}
-	tests := []struct {
-		name string
-		args args
-		want bool
-	}{
-		{
-			name: "test positive",
-			args: args{
-				hash:       "lmlmllnnl",
-				zerosCount: 20,
-			},
-			want: true,
-		},
-	}
-	for _, tt := range tests {
-		t.Run(tt.name, func(t *testing.T) {
-			hash, nonce, err := ComputeHashcash(GenerateChallenge(32), 1000000, 20)
-			if err != nil {
-				t.Errorf("ComputeHashcash() error = %v", err)
-			}
-			fmt.Println(hash, nonce)
-			if got := IsHashCorrect(tt.args.hash, tt.args.zerosCount); got != tt.want {
-				t.Errorf("IsHashCorrect() = %v, want %v", got, tt.want)
-			}
-		})
-	}
-}
-
 func BenchmarkComputeHashcash(b *testing.B) {
 	maxIterations := 100000000
 

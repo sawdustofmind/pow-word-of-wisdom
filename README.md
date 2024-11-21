@@ -47,3 +47,20 @@ go test ./...
 - think of changing JSON to protobuff, messagepack
 - client reconnect
 - code needs some refactoring
+
+### 5 Docker output
+```
+> make up
+> make logs
+client-1  | {"L":"ERROR","T":"2024-11-21T12:47:48.733Z","M":"start client"}
+server-1  | {"L":"INFO","T":"2024-11-21T12:47:48.637Z","M":"start listening","component":"server","address":"172.25.0.2:8888"}
+client-1  | {"L":"INFO","T":"2024-11-21T12:47:48.758Z","M":"connected","service":"client","id":"1a0057e5-a18c-433a-9e5f-e028e682c59a","address":"server:8888"}
+server-1  | {"L":"INFO","T":"2024-11-21T12:47:53.772Z","M":"received message","component":"client","id":"f04a1e53-1366-4fc0-ae44-759922fb2d75","address":"172.25.0.3:46372","message":"{\"type\":\"challenge\",\"challenge_counter\":0}"}
+server-1  | {"L":"INFO","T":"2024-11-21T12:47:53.784Z","M":"write message to client","component":"client","id":"f04a1e53-1366-4fc0-ae44-759922fb2d75","address":"172.25.0.3:46372","message":"{\"type\":\"challenge\",\"data\":{\"challenge\":\"d6b57772d694eda650d9322c4c3202af22b07ff1571a6103032f559c54a274f1\"},\"ts\":1732193273783347597}\n"}
+client-1  | {"L":"INFO","T":"2024-11-21T12:47:53.802Z","M":"Hashcash computed","service":"client","id":"1a0057e5-a18c-433a-9e5f-e028e682c59a","address":"server:8888","elapsed":"36.84575ms"}
+client-1  | d6b57772d694eda650d9322c4c3202af22b07ff1571a6103032f559c54a274f1 8553 4
+server-1  | {"L":"INFO","T":"2024-11-21T12:47:53.802Z","M":"received message","component":"client","id":"f04a1e53-1366-4fc0-ae44-759922fb2d75","address":"172.25.0.3:46372","message":"{\"type\":\"quote\",\"challenge_counter\":8553}"}
+server-1  | d6b57772d694eda650d9322c4c3202af22b07ff1571a6103032f559c54a274f1 8553 4
+server-1  | {"L":"INFO","T":"2024-11-21T12:47:53.804Z","M":"write message to client","component":"client","id":"f04a1e53-1366-4fc0-ae44-759922fb2d75","address":"172.25.0.3:46372","message":"{\"type\":\"quote\",\"data\":{\"quote\":\"A decision has value when it foresees its impact on the future and keeps in mind the learnings from the past and touches major subjects or matters of life.\"},\"ts\":1732193273804191055}\n"}
+client-1  | {"L":"INFO","T":"2024-11-21T12:47:53.804Z","M":"quote result","service":"client","id":"1a0057e5-a18c-433a-9e5f-e028e682c59a","address":"server:8888","message":"A decision has value when it foresees its impact on the future and keeps in mind the learnings from the past and touches major subjects or matters of life."}
+```
